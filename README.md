@@ -28,29 +28,29 @@ This project runs using Docker. It should work consistently on Windows, macOS or
 
 Follow the below steps to run a local development environment.
 
-1.  Ensure you have the following installed:
+1. Ensure you have the following installed:
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-2.  Clone the project, `cd` to it in Terminal/Command Prompt and run the following:
+1. Clone the project, `cd` to it in Terminal/Command Prompt and run the following:
 
 ```sh
 docker compose up
 ```
 
-3.  Browse the project at [http://127.0.0.1:8000/api/health-check/](http://127.0.0.1:8000/api/health-check/)
+1. Browse the project at [http://127.0.0.1:8000/api/health-check/](http://127.0.0.1:8000/api/health-check/)
 
 ### Creating Superuser
 
 To create a superuser to access the Django admin follow these steps.
 
-1.  Run the below command and follow the in terminal instructions:
+1. Run the below command and follow the in terminal instructions:
 
 ```sh
 docker compose run --rm app sh -c "python manage.py createsuperuser"
 ```
 
-2.  Browse the Django admin at [http://127.0.0.1:8000/admin] and login.
+1. Browse the Django admin at [http://127.0.0.1:8000/admin] and login.
 
 ### Clearing Storage
 
@@ -211,7 +211,7 @@ Configure Git:
 
 ```sh
 git config --global user.email email@example.com
-git config --global user.name "User Name" 
+git config --global user.name "User Name"
 git config --global push.autoSetupRemote true
 ```
 
@@ -225,3 +225,5 @@ Or find them below:
 - [Build a Backend REST API with Python & Django REST Framework - Beginner](https://londonapp.dev/c1)
 - [Build a Backend REST API with Python & Django REST Framework - Advanced](https://londonapp.dev/c2)
 - [Deploy a Serverless Django App on Google App Engine](https://londonapp.dev/c5)
+
+Hello 123
