@@ -206,9 +206,9 @@ data "aws_iam_policy_document" "iam_rds" {
 
 
 resource "aws_iam_policy" "iam_rds" {
-  name = "${aws_iam_user.cd.name}-iam-rds"
+  name        = "${aws_iam_user.cd.name}-iam-rds"
   description = "Allow user to manage RDS resources and create service linked roles for rds"
-  policy = data.aws_iam_policy_document.iam_rds.json
+  policy      = data.aws_iam_policy_document.iam_rds.json
 }
 
 resource "aws_iam_user_policy_attachment" "iam_rds" {
