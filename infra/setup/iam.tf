@@ -138,7 +138,6 @@ data "aws_iam_policy_document" "ec2" {
       "ec2:ModifyVpcAttribute",
       "ec2:RevokeSecurityGroupIngress",
       "ec2:DescribeAvailabilityZones",
-      "iam:CreateServiceLinkedRole"
     ]
     resources = ["*"]
   }
@@ -187,4 +186,32 @@ resource "aws_iam_policy" "rds" {
 resource "aws_iam_user_policy_attachment" "rds" {
   user       = aws_iam_user.cd.name
   policy_arn = aws_iam_policy.rds.arn
+}
+
+######################################
+# Policy for RDS Service Linked Role #
+######################################
+
+data "aws_iam_policy_document" "iam_rds" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "iam:CreateServiceLinkedRole"
+    ]
+    resources = [
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS"
+    ]
+  }
+}
+
+
+resource "aws_iam_policy" "iam_rds" {
+  name = "${aws_iam_user.cd.name}-iam-rds"
+  description = "Allow user to manage RDS resources and create service linked roles for rds"
+  policy = data.aws_iam_policy_document.iam_rds.json
+}
+
+resource "aws_iam_user_policy_attachment" "iam_rds" {
+  user       = aws_iam_user.cd.name
+  policy_arn = aws_iam_policy.iam_rds.arn
 }
