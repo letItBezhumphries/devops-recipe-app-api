@@ -2,6 +2,10 @@
 # RDS Database #
 ################
 
+resource "aws_iam_service_linked_role" "rds" {
+  aws_service_name = "rds.amazonaws.com"
+}
+
 resource "aws_db_subnet_group" "main" {
   name = "${local.prefix}-main"
   subnet_ids = [
@@ -9,6 +13,7 @@ resource "aws_db_subnet_group" "main" {
     aws_subnet.private_b.id
   ]
 
+  depends_on = [ aws_iam_service_linked_role.rds ]
   tags = {
     Name = "${local.prefix}-db-subnet-group"
   }
