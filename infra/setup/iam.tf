@@ -137,7 +137,8 @@ data "aws_iam_policy_document" "ec2" {
       "ec2:AttachInternetGateway",
       "ec2:ModifyVpcAttribute",
       "ec2:RevokeSecurityGroupIngress",
-      "ec2:DescribeAvailabilityZones"
+      "ec2:DescribeAvailabilityZones",
+      "iam:CreateServiceLinkedRole"
     ]
     resources = ["*"]
   }
@@ -172,7 +173,6 @@ data "aws_iam_policy_document" "rds" {
       "rds:AddTagsToResource",
       "rds:ModifyDBInstance",
       "rds:ModifyDBSubnetGroup",
-      "iam:CreateServiceLinkedRole"
     ]
     resources = ["*"]
   }
@@ -188,4 +188,3 @@ resource "aws_iam_user_policy_attachment" "rds" {
   user       = aws_iam_user.cd.name
   policy_arn = aws_iam_policy.rds.arn
 }
-
