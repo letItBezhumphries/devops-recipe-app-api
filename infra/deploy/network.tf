@@ -56,33 +56,33 @@ resource "aws_route" "public_internet_access_a" {
 }
 
 
-resource "aws_subnet" "public_c" {
+resource "aws_subnet" "public_b" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.1.2.0/24"
 
   map_public_ip_on_launch = true
-  availability_zone       = "${data.aws_region.current.name}c"
+  availability_zone       = "${data.aws_region.current.name}b"
 
   tags = {
-    Name = "${local.prefix}-public-c"
+    Name = "${local.prefix}-public-b"
   }
 }
 
-resource "aws_route_table" "public_c" {
+resource "aws_route_table" "public_b" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${local.prefix}-public-c"
+    Name = "${local.prefix}-public-b"
   }
 }
 
-resource "aws_route_table_association" "public_c" {
-  subnet_id      = aws_subnet.public_c.id
-  route_table_id = aws_route_table.public_c.id
+resource "aws_route_table_association" "public_b" {
+  subnet_id      = aws_subnet.public_b.id
+  route_table_id = aws_route_table.public_b.id
 }
 
-resource "aws_route" "public_internet_access_c" {
-  route_table_id         = aws_route_table.public_c.id
+resource "aws_route" "public_internet_access_b" {
+  route_table_id         = aws_route_table.public_b.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.main.id
 }
@@ -103,12 +103,12 @@ resource "aws_subnet" "private_a" {
 }
 
 
-resource "aws_subnet" "private_c" {
+resource "aws_subnet" "private_b" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.1.11.0/24"
-  availability_zone = "${data.aws_region.current.name}c"
+  availability_zone = "${data.aws_region.current.name}b"
 
   tags = {
-    Name = "${local.prefix}-private-c"
+    Name = "${local.prefix}-private-b"
   }
 }
