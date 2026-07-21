@@ -3,7 +3,6 @@
 ################
 
 resource "aws_db_subnet_group" "main" {
-
   name = "${local.prefix}-main"
   subnet_ids = [
     aws_subnet.private_a.id,
@@ -16,7 +15,7 @@ resource "aws_db_subnet_group" "main" {
 }
 
 resource "aws_security_group" "rds" {
-  description = "Allow access to the RDS database instance"
+  description = "Allow access to the RDS database instance."
   name        = "${local.prefix}-rds-inbound-access"
   vpc_id      = aws_vpc.main.id
 
@@ -31,7 +30,6 @@ resource "aws_security_group" "rds" {
   }
 }
 
-
 resource "aws_db_instance" "main" {
   identifier                 = "${local.prefix}-db"
   db_name                    = "recipe"
@@ -40,17 +38,14 @@ resource "aws_db_instance" "main" {
   engine                     = "postgres"
   engine_version             = "15.3"
   auto_minor_version_upgrade = true
-  instance_class             = "db-t4g.micro"
+  instance_class             = "db.t4g.micro"
   username                   = var.db_username
   password                   = var.db_password
-
-  skip_final_snapshot     = true
-  db_subnet_group_name    = aws_db_subnet_group.main.name
-  multi_az                = false
-  backup_retention_period = 0
-  vpc_security_group_ids = [
-    aws_security_group.rds.id
-  ]
+  skip_final_snapshot        = true
+  db_subnet_group_name       = aws_db_subnet_group.main.name
+  multi_az                   = false
+  backup_retention_period    = 0
+  vpc_security_group_ids     = [aws_security_group.rds.id]
 
   tags = {
     Name = "${local.prefix}-main"
