@@ -170,6 +170,7 @@ data "aws_iam_policy_document" "rds" {
       "rds:ListTagsForResource",
       "rds:AddTagsToResource",
       "rds:ModifyDBInstance",
+      "rds:ModifyDBSubnetGroup",
       "iam:CreateServiceLinkedRole"
     ]
     resources = ["*"]
