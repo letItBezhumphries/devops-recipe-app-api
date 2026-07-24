@@ -59,7 +59,7 @@ resource "aws_ecs_task_definition" "api" {
     [
       {
         name              = "api"
-        image             = var.ecr_app_image
+        image             = var.ecr_demoapp_image
         essential         = true
         memoryReservation = 256
         user              = "django-user"

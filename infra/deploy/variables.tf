@@ -26,7 +26,7 @@ variable "ecr_proxy_image" {
   description = "Path to the ECR repo with the proxy image"
 }
 
-variable "ecr_app_image" {
+variable "ecr_demoapp_image" {
   description = "Path to the ECR repo with application image"
 }
 
