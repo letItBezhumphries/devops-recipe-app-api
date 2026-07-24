@@ -258,6 +258,12 @@ resource "aws_iam_user_policy_attachment" "ecs" {
   policy_arn = aws_iam_policy.ecs.arn
 }
 
+resource "aws_iam_service_linked_role" "ecs" {
+  aws_service_name = "ecs.amazonaws.com"
+  description      = "Service-linked role for Amazon ECS Service"
+}
+
+
 #########################
 # Policy for IAM access #
 #########################
