@@ -52,6 +52,4 @@ jobs:
           cd infra/
           docker compose run --rm terraform -chdir=deploy/ init
           docker compose run --rm terraform -chdir=deploy/ workspace select -or-create $workspace
-          echo $TF_VAR_ecr_demoapp_image
-          echo $TF_VAR_ecr_proxy_image
           docker compose run --rm terraform -chdir=deploy/ apply -auto-approve
