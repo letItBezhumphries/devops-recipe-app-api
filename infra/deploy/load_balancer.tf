@@ -50,13 +50,12 @@ resource "aws_lb_target_group" "api" {
   port        = 8000
 
   health_check {
-    path = "/api/health-check"
-
+    path = "/api/health-check/"
   }
 }
 
 
-resource "aws_alb_listener" "api" {
+resource "aws_lb_listener" "api" {
   load_balancer_arn = aws_lb.api.arn
   port              = 80
   protocol          = "HTTP"
