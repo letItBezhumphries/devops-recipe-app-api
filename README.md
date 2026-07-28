@@ -229,3 +229,4 @@ Or find them below:
 ### Cheatsheets of importance and documents -
 
 - [cheatsheet for subnet mask](https://www.aelius.com/njh/subnet_sheet.html)
+- [cheatsheet chmod calculator](https://chmod-calculator.com/#google_vignette)
