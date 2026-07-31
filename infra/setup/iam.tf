@@ -380,11 +380,11 @@ resource "aws_iam_service_linked_role" "elb" {
   description      = "Service-linked role for Amazon Load Balancer Service"
 }
 
-#########################
-# Policy for EFS access #
-#########################
+##############################################
+# Policy for EFS access for Route53 access #
+##############################################
 
-data "aws_iam_policy_document" "efs" {
+data "aws_iam_policy_document" "efs_and_rt53" {
   statement {
     effect = "Allow"
     actions = [
@@ -400,23 +400,41 @@ data "aws_iam_policy_document" "efs" {
       "elasticfilesystem:CreateAccessPoint",
       "elasticfilesystem:CreateFileSystem",
       "elasticfilesystem:TagResource",
+      "route53:ListHostedZones",
+      "route53:ListHostedZones",
+      "route53:ChangeTagsForResource",
+      "route53:GetHostedZone",
+      "route53:ListTagsForResource",
+      "route53:ChangeResourceRecordSets",
+      "route53:GetChange",
+      "route53:ListResourceRecordSets",
+      "acm:RequestCertificate",
+      "acm:AddTagsToCertificate",
+      "acm:DescribeCertificate",
+      "acm:ListTagsForCertificate",
+      "acm:DeleteCertificate",
+      "acm:CreateCertificate"
     ]
     resources = ["*"]
   }
 }
 
-resource "aws_iam_policy" "efs" {
-  name        = "${aws_iam_user.cd.name}-efs"
-  description = "Allow user to manage EFS resources."
-  policy      = data.aws_iam_policy_document.efs.json
+resource "aws_iam_policy" "efs_and_rt53" {
+  name        = "${aws_iam_user.cd.name}-efs-and-route53"
+  description = "Allow user to manage EFS resources and route 53 resources."
+  policy      = data.aws_iam_policy_document.efs_and_rt53.json
 }
 
 resource "aws_iam_user_policy_attachment" "efs" {
   user       = aws_iam_user.cd.name
-  policy_arn = aws_iam_policy.efs.arn
+  policy_arn = aws_iam_policy.efs_and_rt53.arn
 }
 
 resource "aws_iam_service_linked_role" "efs" {
   aws_service_name = "elasticfilesystem.amazonaws.com"
   description      = "Service-linked role for Amazon EFS Service"
 }
+
+
+
+

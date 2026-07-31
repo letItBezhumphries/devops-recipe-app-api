@@ -204,7 +204,7 @@ resource "aws_vpc_endpoint" "ssm" {
     aws_security_group.endpoint_access.id
   ]
   tags = {
-    Name = "${local.prefix}-ssm-endpoint"
+    Name = "${local.prefix}-ssmmessages-endpoint"
   }
 }
 
