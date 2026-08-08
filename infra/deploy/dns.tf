@@ -1,5 +1,5 @@
 data "aws_route53_zone" "zone" {
-  name = var.dns_zone_name
+  name = "${var.dns_zone_name}."
 }
 
 resource "aws_route53_record" "app" {
